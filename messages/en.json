@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "title": "3vantage Aquascaping - Join the Revolution",
+    "description": "Get early access to professional aquascaping tools that will transform your underwater landscapes. Join our exclusive waitlist today."
+  },
+  "nav": {
+    "home": "Home",
+    "blog": "Blog",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "badge": "Coming Soon",
+    "title": "Join the Aquascaping Revolution",
+    "subtitle": "Transform your underwater world with professional-grade tools designed for aquascaping enthusiasts and experts alike.",
+    "description": "Get early access to cutting-edge aquascaping software that will revolutionize how you design, plan, and maintain your aquatic masterpieces.",
+    "cta": "Join Waitlist",
+    "secondaryCta": "Learn More",
+    "trustedBy": "Trusted by {count}+ aquascaping enthusiasts"
+  },
+  "features": {
+    "title": "Why Aquascaping Professionals Choose 3vantage",
+    "subtitle": "Discover the tools that will elevate your aquascaping to new heights",
+    "design": {
+      "title": "3D Aquascape Designer",
+      "description": "Visualize your aquascape in stunning 3D before you build. Plan every plant, rock, and decoration with precision."
+    },
+    "calculator": {
+      "title": "Smart Calculation Tools",
+      "description": "Calculate CO2, lighting, fertilizers, and water parameters automatically. Never guess again."
+    },
+    "community": {
+      "title": "Expert Community",
+      "description": "Connect with professional aquascapers worldwide. Share designs, get feedback, and learn from the best."
+    }
+  },
+  "waitlist": {
+    "title": "Secure Your Early Access",
+    "subtitle": "Be among the first to experience the future of aquascaping",
+    "form": {
+      "name": {
+        "label": "Your Name",
+        "placeholder": "Enter your full name"
+      },
+      "email": {
+        "label": "Email Address",
+        "placeholder": "Enter your email address"
+      },
+      "experience": {
+        "label": "Experience Level",
+        "placeholder": "Select your experience",
+        "options": {
+          "beginner": "Beginner",
+          "intermediate": "Intermediate", 
+          "advanced": "Advanced",
+          "professional": "Professional"
+        }
+      },
+      "interests": {
+        "label": "Interested Features",
+        "3d_design": "3D Aquascape Designer",
+        "calculations": "Smart Calculations",
+        "community": "Community Features",
+        "mobile_app": "Mobile App",
+        "ai_assistant": "AI Assistant"
+      },
+      "gdpr": {
+        "consent": "I consent to receive updates about the 3vantage platform launch and understand I can unsubscribe at any time.",
+        "marketing": "I'd like to receive aquascaping tips and exclusive content (optional).",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Service"
+      },
+      "submit": "Reserve My Spot",
+      "submitting": "Joining Waitlist..."
+    },
+    "success": {
+      "title": "Welcome to the Community!",
+      "message": "You're successfully on our waitlist!",
+      "position": "You're #{position} in line",
+      "next": "Check your email for exclusive aquascaping content",
+      "share": "Share with Friends",
+      "shareMessage": "Help us grow the aquascaping community!"
+    },
+    "errors": {
+      "required": "This field is required",
+      "email": "Please enter a valid email address",
+      "name": "Name must be at least 2 characters",
+      "consent": "You must consent to receive updates",
+      "generic": "Something went wrong. Please try again."
+    }
+  },
+  "testimonials": {
+    "title": "Loved by Aquascaping Enthusiasts",
+    "subtitle": "Join thousands of aquascapers who are already transforming their craft",
+    "items": [
+      {
+        "name": "Marcus Chen",
+        "role": "Professional Aquascaper",
+        "content": "The 3D visualization tools are game-changing. I can show clients exactly what their aquascape will look like before we start.",
+        "rating": 5
+      },
+      {
+        "name": "Elena Petrov",
+        "role": "Aquascaping Enthusiast",
+        "content": "Finally, a tool that takes the guesswork out of aquascaping. The calculation features alone are worth the wait.",
+        "rating": 5
+      },
+      {
+        "name": "James Thompson",
+        "role": "Aquarium Shop Owner",
+        "content": "This will revolutionize how we help customers plan their aquascapes. Can't wait for the full release!",
+        "rating": 5
+      }
+    ]
+  },
+  "blog": {
+    "title": "Latest Aquascaping Insights",
+    "subtitle": "Expert tips, guides, and inspiration for your aquascaping journey",
+    "readMore": "Read More",
+    "readTime": "{minutes} min read",
+    "publishedOn": "Published on {date}",
+    "author": "By {name}",
+    "categories": "Categories",
+    "tags": "Tags",
+    "share": "Share Article",
+    "relatedPosts": "Related Articles"
+  },
+  "footer": {
+    "tagline": "Transforming aquascaping through innovation",
+    "company": {
+      "title": "Company",
+      "about": "About Us",
+      "contact": "Contact",
+      "careers": "Careers",
+      "press": "Press Kit"
+    },
+    "product": {
+      "title": "Product",
+      "features": "Features",
+      "pricing": "Pricing",
+      "updates": "Updates",
+      "roadmap": "Roadmap"
+    },
+    "resources": {
+      "title": "Resources",
+      "blog": "Blog",
+      "guides": "Guides",
+      "community": "Community",
+      "support": "Support"
+    },
+    "legal": {
+      "title": "Legal",
+      "privacy": "Privacy Policy",
+      "terms": "Terms of Service",
+      "cookies": "Cookie Policy",
+      "gdpr": "GDPR Compliance"
+    },
+    "social": {
+      "title": "Follow Us",
+      "newsletter": "Subscribe to our newsletter for aquascaping tips and updates"
+    },
+    "copyright": "© {year} 3vantage. All rights reserved.",
+    "madeWith": "Made with ❤️ for the aquascaping community"
+  },
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "retry": "Try Again",
+    "close": "Close",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "share": "Share",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "viewAll": "View All",
+    "showMore": "Show More",
+    "showLess": "Show Less"
+  }
+}

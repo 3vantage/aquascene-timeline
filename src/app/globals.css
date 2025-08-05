@@ -1,0 +1,343 @@
+@import "tailwindcss";
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Source+Sans+Pro:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+:root {
+  /* Aquascaping Color Palette */
+  --color-primary: #2D5A3D;
+  --color-primary-light: #4A7C59;
+  --color-primary-dark: #1A3A2E;
+  --color-secondary: #4A90A4;
+  --color-secondary-light: #87CEEB;
+  --color-secondary-dark: #1E3A5F;
+  --color-accent: #6B9B7C;
+  --color-accent-light: #A8C9B0;
+  --color-accent-coral: #FF6B6B;
+  --color-accent-emerald: #1A8B42;
+  
+  /* Neutral Colors */
+  --color-background: #FFFFFF;
+  --color-foreground: #374151;
+  --color-muted: #F8F9FA;
+  --color-surface: #FAFAFA;
+  --color-border: #E5E7EB;
+  
+  /* Status Colors */
+  --color-success: #28A745;
+  --color-warning: #FFC107;
+  --color-error: #DC3545;
+  --color-info: #17A2B8;
+  
+  /* Typography */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-secondary: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-accent: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  
+  /* Spacing & Sizes */
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2rem;
+  --space-xl: 3rem;
+  --space-2xl: 4rem;
+  
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 25px 50px rgba(0, 0, 0, 0.25);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  
+  /* Animation Durations */
+  --duration-fast: 0.15s;
+  --duration-normal: 0.3s;
+  --duration-slow: 0.6s;
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Dark Mode Aquascaping Theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-background: #1A2332;
+    --color-foreground: #E2E8F0;
+    --color-muted: #2D3748;
+    --color-surface: #374151;
+    --color-border: #4B5563;
+    --color-primary: #4A7C59;
+    --color-secondary: #5A9DB8;
+  }
+}
+
+/* Base Styles */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-primary);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Improved focus states for accessibility */
+*:focus-visible {
+  outline: 3px solid var(--color-accent-emerald);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* Glass morphism utility classes */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: var(--shadow-glass);
+}
+
+.glass-underwater {
+  background: rgba(74, 144, 164, 0.1);
+  backdrop-filter: blur(24px);
+  border: 1px solid rgba(135, 206, 235, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(30, 58, 95, 0.3);
+}
+
+.glass-deep-water {
+  background: rgba(45, 90, 61, 0.15);
+  backdrop-filter: blur(32px);
+  border: 1px solid rgba(107, 155, 124, 0.25);
+  box-shadow: 0 12px 40px 0 rgba(26, 58, 46, 0.4);
+}
+
+/* Water ripple effect */
+.water-ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.water-ripple::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: ripple-wave 3s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes ripple-wave {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+
+/* Underwater current effect */
+.underwater-current {
+  animation: current-flow 6s ease-in-out infinite;
+}
+
+@keyframes current-flow {
+  0%, 100% {
+    transform: translateX(0px) skewX(0deg);
+  }
+  33% {
+    transform: translateX(5px) skewX(0.5deg);
+  }
+  66% {
+    transform: translateX(-3px) skewX(-0.3deg);
+  }
+}
+
+/* Light refraction effects */
+.light-refraction {
+  position: relative;
+  overflow: hidden;
+}
+
+.light-refraction::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.05) 10px,
+    rgba(255, 255, 255, 0.05) 20px,
+    transparent 20px,
+    transparent 30px,
+    rgba(135, 206, 235, 0.05) 30px,
+    rgba(135, 206, 235, 0.05) 40px
+  );
+  animation: light-caustics 12s linear infinite;
+  pointer-events: none;
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .water-ripple::before,
+  .light-refraction::before {
+    animation: none;
+    opacity: 0.1;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .glass-effect,
+  .glass-underwater,
+  .glass-deep-water {
+    background: var(--color-surface);
+    border: 2px solid var(--color-border);
+    backdrop-filter: none;
+  }
+  
+  .water-ripple::before,
+  .light-refraction::before {
+    display: none;
+  }
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: var(--radius-lg);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
+}
+
+/* Selection styling */
+::selection {
+  background: rgba(26, 139, 66, 0.2);
+  color: var(--color-foreground);
+}
+
+/* Utility classes for consistent spacing */
+.container-padding {
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+@media (min-width: 768px) {
+  .container-padding {
+    padding-left: var(--space-xl);
+    padding-right: var(--space-xl);
+  }
+}
+
+.section-spacing {
+  padding-top: var(--space-2xl);
+  padding-bottom: var(--space-2xl);
+}
+
+@media (min-width: 768px) {
+  .section-spacing {
+    padding-top: calc(var(--space-2xl) * 1.5);
+    padding-bottom: calc(var(--space-2xl) * 1.5);
+  }
+}
+
+/* Typography helpers */
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
+}
+
+/* Loading animation for better perceived performance */
+.loading-shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--color-muted) 0%,
+    var(--color-surface) 50%,
+    var(--color-muted) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Print styles */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .glass-effect,
+  .glass-underwater,
+  .glass-deep-water {
+    background: white !important;
+    backdrop-filter: none !important;
+    border: 1px solid #ccc !important;
+    box-shadow: none !important;
+  }
+}
