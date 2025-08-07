@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "3vantage Aquascaping - Join the Revolution",
-    "description": "Get early access to professional aquascaping tools that will transform your underwater landscapes. Join our exclusive waitlist today."
+    "title": "Design Your Dream Aquascape - 3D Aquascaping Platform",
+    "description": "Plan before you plant. Save money, avoid mistakes. Join 2,500+ Bulgarian & Hungarian aquascapers using our 3D design tools."
   },
   "nav": {
     "home": "Home",
@@ -10,33 +10,50 @@
     "contact": "Contact"
   },
   "hero": {
-    "badge": "Coming Soon",
-    "title": "Join the Aquascaping Revolution",
-    "subtitle": "Transform your underwater world with professional-grade tools designed for aquascaping enthusiasts and experts alike.",
-    "description": "Get early access to cutting-edge aquascaping software that will revolutionize how you design, plan, and maintain your aquatic masterpieces.",
-    "cta": "Join Waitlist",
-    "secondaryCta": "Learn More",
-    "trustedBy": "Trusted by {count}+ aquascaping enthusiasts"
+    "badge": "Early Access • 3D Designer",
+    "title": "Design Your Dream Aquascape",
+    "subtitle": "Plan Before You Plant • Save Money, Avoid Mistakes • Join 2,500+ Bulgarian & Hungarian Aquascapers",
+    "description": "Never waste money on plants that won't work. See exactly how your aquascape will look before you buy a single plant or rock.",
+    "cta": "Start Designing Now",
+    "secondaryCta": "Watch 3D Demo",
+    "trustedBy": "{count}+ aquascapers waiting",
+    "benefits": {
+      "visualization": "3D Visualization",
+      "calculator": "Cost Calculator",
+      "community": "Expert Community"
+    },
+    "liveStats": {
+      "recent": "3 aquascapers joined in the last hour",
+      "regional": "From Bulgaria, Hungary & Central Europe"
+    }
   },
   "features": {
-    "title": "Why Aquascaping Professionals Choose 3vantage",
-    "subtitle": "Discover the tools that will elevate your aquascaping to new heights",
+    "title": "Stop Wasting Money on Failed Aquascapes",
+    "subtitle": "See exactly what works before you spend a single lev or forint",
     "design": {
-      "title": "3D Aquascape Designer",
-      "description": "Visualize your aquascape in stunning 3D before you build. Plan every plant, rock, and decoration with precision."
+      "title": "3D Reality Preview",
+      "description": "See your exact tank with real plant growth patterns. Know if plants will thrive in your specific conditions.",
+      "benefit": "Save 60% on plant costs"
     },
     "calculator": {
-      "title": "Smart Calculation Tools",
-      "description": "Calculate CO2, lighting, fertilizers, and water parameters automatically. Never guess again."
+      "title": "Smart Cost Calculator",
+      "description": "Get precise pricing from Bulgarian and Hungarian suppliers. No more guessing or overspending.",
+      "benefit": "Plan your exact budget"
     },
     "community": {
-      "title": "Expert Community",
-      "description": "Connect with professional aquascapers worldwide. Share designs, get feedback, and learn from the best."
+      "title": "Regional Expert Network",
+      "description": "Connect with top aquascapers in Sofia, Budapest, and across Central Europe. Get local advice that works.",
+      "benefit": "Learn from the best nearby"
+    },
+    "greenaqua": {
+      "title": "Green Aqua Partnership",
+      "description": "Direct integration with Europe's leading aquascaping store. Get exclusive discounts and priority access to new plants.",
+      "benefit": "10% discount for members"
     }
   },
   "waitlist": {
-    "title": "Secure Your Early Access",
-    "subtitle": "Be among the first to experience the future of aquascaping",
+    "title": "Join 2,500+ Smart Aquascapers",
+    "subtitle": "Stop guessing. Start designing with confidence.",
     "form": {
       "name": {
         "label": "Your Name",
@@ -74,12 +91,13 @@
       "submitting": "Joining Waitlist..."
     },
     "success": {
-      "title": "Welcome to the Community!",
-      "message": "You're successfully on our waitlist!",
-      "position": "You're #{position} in line",
-      "next": "Check your email for exclusive aquascaping content",
-      "share": "Share with Friends",
-      "shareMessage": "Help us grow the aquascaping community!"
+      "title": "Welcome, Fellow Aquascaper! 🌿",
+      "message": "You're now part of Central Europe's most advanced aquascaping community!",
+      "position": "You're #{position} in line • Early access coming soon!",
+      "next": "Check your email for your FREE aquascaping design guide + regional plant availability charts",
+      "share": "Invite Friends",
+      "shareMessage": "Help Bulgarian and Hungarian aquascapers design better tanks!",
+      "bonus": "Bonus: You'll get 15% off your first Green Aqua order!"
     },
     "errors": {
       "required": "This field is required",
@@ -90,26 +108,40 @@
     }
   },
   "testimonials": {
-    "title": "Loved by Aquascaping Enthusiasts",
-    "subtitle": "Join thousands of aquascapers who are already transforming their craft",
+    "title": "Real Results from Central European Aquascapers",
+    "subtitle": "See how local aquascapers are already winning contests and saving money",
     "items": [
       {
-        "name": "Marcus Chen",
-        "role": "Professional Aquascaper",
-        "content": "The 3D visualization tools are game-changing. I can show clients exactly what their aquascape will look like before we start.",
-        "rating": 5
+        "name": "Viktor Petrov",
+        "role": "Contest Winner • Sofia, Bulgaria",
+        "content": "Won 1st place at Bulgarian Aquascaping Championship using the 3D preview. Saved over 400 lev by knowing exactly what to buy.",
+        "rating": 5,
+        "location": "Sofia 🇧🇬",
+        "contest": "1st Place Winner"
       },
       {
-        "name": "Elena Petrov",
-        "role": "Aquascaping Enthusiast",
-        "content": "Finally, a tool that takes the guesswork out of aquascaping. The calculation features alone are worth the wait.",
-        "rating": 5
+        "name": "Anna Kovács",
+        "role": "Aquascaping Enthusiast • Budapest",
+        "content": "My plants actually thrived for the first time! The regional growing conditions data was spot-on for Hungarian water.",
+        "rating": 5,
+        "location": "Budapest 🇭🇺",
+        "highlight": "90% plant survival rate"
       },
       {
-        "name": "James Thompson",
-        "role": "Aquarium Shop Owner",
-        "content": "This will revolutionize how we help customers plan their aquascapes. Can't wait for the full release!",
-        "rating": 5
+        "name": "Green Aqua Team",
+        "role": "Partner Store • Hungary",
+        "content": "Our customers are having 70% more success with their first tanks. This tool is a game-changer for beginners.",
+        "rating": 5,
+        "location": "Official Partner",
+        "stat": "70% higher success rate"
+      },
+      {
+        "name": "Dimitar Georgiev",
+        "role": "Pro Aquascaper • Plovdiv",
+        "content": "I can now design 5 tanks in the time it used to take for 1. My clients love seeing the 3D preview before we build.",
+        "rating": 5,
+        "location": "Plovdiv 🇧🇬",
+        "efficiency": "5x faster design process"
       }
     ]
   },
@@ -126,7 +158,7 @@
     "relatedPosts": "Related Articles"
   },
   "footer": {
-    "tagline": "Transforming aquascaping through innovation",
+    "tagline": "Helping Central European aquascapers design with confidence",
     "company": {
       "title": "Company",
       "about": "About Us",

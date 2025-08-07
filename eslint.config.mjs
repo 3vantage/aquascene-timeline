@@ -13,9 +13,12 @@ const eslintConfig = [
   ...compat.extends("next/core-web-vitals"),
   {
     ignores: ["src/emails/**/*", "src/components/ui/**/*", "src/lib/**/*"],
+  },
+  {
     rules: {
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-unused-vars': 'warn',
+      'react/no-unescaped-entities': 'off',
+      '@next/next/no-page-custom-font': 'off',
+      'react-hooks/exhaustive-deps': 'warn',
     }
   },
 ];

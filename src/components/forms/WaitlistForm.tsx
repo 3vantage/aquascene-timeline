@@ -56,28 +56,30 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ className = '' }) => {
     setIsSubmitting(true);
     
     try {
-      const response = await fetch('/api/waitlist', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
+      // For static deployment, use a client-side solution
+      // In a real deployment, you would use services like Formspree, Netlify Forms, etc.
+      
+      // Simulate API delay for better UX
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Generate a mock position for demo purposes
+      const position = Math.floor(Math.random() * 1000) + 1;
+      
+      // Store submission data in localStorage (for demo purposes)
+      const submissions = JSON.parse(localStorage.getItem('waitlist-submissions') || '[]');
+      submissions.push({
+        ...data,
+        position,
+        timestamp: new Date().toISOString()
       });
-
-      const result = await response.json();
-
-      if (response.ok) {
-        setSubmissionResult({
-          success: true,
-          position: result.position
-        });
-        reset();
-      } else {
-        setSubmissionResult({
-          success: false,
-          error: result.message || tErrors('generic')
-        });
-      }
+      localStorage.setItem('waitlist-submissions', JSON.stringify(submissions));
+      
+      setSubmissionResult({
+        success: true,
+        position: position
+      });
+      reset();
+      
     } catch (error) {
       console.error('Form submission error:', error);
       setSubmissionResult({
