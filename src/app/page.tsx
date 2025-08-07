@@ -17,6 +17,7 @@ export default function RootPage() {
           />
         </head>
         <body>
+          {/* eslint-disable-next-line @next/next/no-html-link-for-pages */}
           <p>Redirecting to <a href="/en/">English version</a>...</p>
         </body>
       </html>
