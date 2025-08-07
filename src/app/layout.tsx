@@ -1,4 +1,4 @@
-import {locales} from '@/i18n';
+import {locales} from '../../i18n';
 import type {Metadata} from 'next';
 
 export const metadata: Metadata = {
