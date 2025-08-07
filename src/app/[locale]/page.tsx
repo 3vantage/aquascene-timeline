@@ -10,6 +10,9 @@ interface PageProps {
   params: Promise<{ locale: string }>;
 }
 
+// Force static generation for export
+export const dynamic = 'force-static';
+
 // Generate metadata for SEO
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { locale } = await params;

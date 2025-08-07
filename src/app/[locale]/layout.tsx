@@ -5,6 +5,9 @@ import { notFound } from 'next/navigation';
 import { locales } from '@/i18n';
 import "../globals.css";
 
+// Force static generation for export
+export const dynamic = 'force-static';
+
 // Generate metadata based on locale
 export async function generateMetadata({
   params,
