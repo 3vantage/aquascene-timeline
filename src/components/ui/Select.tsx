@@ -150,8 +150,8 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(({
   );
 
   const motionProps = config.enabled ? {
-    animate: error ? fieldError : (isFocused ? fieldFocus : { scale: 1 }),
-    transition: { duration: 0.2, ease: 'easeOut' }
+    animate: error ? { x: fieldError.x } : (isFocused ? { scale: fieldFocus.scale } : { scale: 1 }),
+    transition: error ? fieldError.transition : (isFocused ? fieldFocus.transition : { duration: 0.2, ease: 'easeOut' })
   } : {};
 
   return (

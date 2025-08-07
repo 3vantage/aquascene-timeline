@@ -101,7 +101,7 @@ export const WelcomeEmail = ({
               </Text>
               <div style={referralCodeBox}>
                 <Text style={referralCodeText}>Your Referral Code</Text>
-                <Text style={referralCode}>{referralCode}</Text>
+                <Text style={referralCodeStyle}>{referralCode}</Text>
               </div>
               <Button style={referralButton} href={`https://aquascene.com/waitlist?ref=${referralCode}`}>
                 Share with Friends
@@ -276,7 +276,7 @@ const referralCodeText = {
   letterSpacing: '0.05em',
 };
 
-const referralCode = {
+const referralCodeStyle = {
   fontSize: '20px',
   fontWeight: '700',
   color: '#2D5A3D',
