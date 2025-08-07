@@ -17,6 +17,17 @@ import {
   UserGroupIcon as HandshakeIcon
 } from '@heroicons/react/24/outline';
 
+// Define interface for feature objects
+interface Feature {
+  icon: React.ElementType;
+  title: string;
+  description: string;
+  benefit: string;
+  color: string;
+  delay: number;
+  isPartnership?: boolean; // Optional partnership flag
+}
+
 const FeaturesSection: React.FC = () => {
   const t = useTranslations('features');
   const locale = useLocale();
@@ -26,7 +37,7 @@ const FeaturesSection: React.FC = () => {
   // Check if user is in Hungarian locale for Green Aqua partnership
   const isHungarian = locale === 'hu';
 
-  const baseFeatures = [
+  const baseFeatures: Feature[] = [
     {
       icon: CubeIcon,
       title: t('design.title'),
@@ -54,7 +65,7 @@ const FeaturesSection: React.FC = () => {
   ];
 
   // Add Green Aqua feature for Hungarian users
-  const features = isHungarian ? [
+  const features: Feature[] = isHungarian ? [
     ...baseFeatures,
     {
       icon: HandshakeIcon,

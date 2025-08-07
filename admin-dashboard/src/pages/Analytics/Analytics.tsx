@@ -1,12 +1,11 @@
 import React from 'react';
-import { Typography } from 'antd';
-
-const { Title } = Typography;
 
 const Analytics: React.FC = () => {
   return (
     <div>
-      <Title level={2}>Analytics & Reporting</Title>
+      <h2 style={{ fontSize: '1.875rem', fontWeight: 'bold', marginBottom: '1rem' }}>
+        Analytics & Reporting
+      </h2>
       <p>Analytics and reporting functionality will be implemented here.</p>
     </div>
   );
