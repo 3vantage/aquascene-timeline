@@ -244,7 +244,6 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ className = '' }) => {
               value={field.value}
               onChange={field.onChange}
               error={errors.experience?.message}
-              className="bg-white/5 border-white/20 text-white"
             />
           )}
         />
@@ -309,7 +308,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ className = '' }) => {
             <Checkbox
               id="marketingConsent"
               label="I'd like to receive aquascaping tips and exclusive content (optional)."
-              checked={field.value}
+              checked={field.value || false}
               onChange={field.onChange}
               className="text-white text-sm"
             />
