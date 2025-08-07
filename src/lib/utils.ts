@@ -50,7 +50,7 @@ export function generateSlug(text: string): string {
 /**
  * Debounce function
  */
-export function debounce<T extends (...args: any[]) => any>(
+export function debounce<T extends (...args: unknown[]) => unknown>(
   func: T,
   delay: number
 ): (...args: Parameters<T>) => void {
@@ -65,7 +65,7 @@ export function debounce<T extends (...args: any[]) => any>(
 /**
  * Throttle function
  */
-export function throttle<T extends (...args: any[]) => any>(
+export function throttle<T extends (...args: unknown[]) => unknown>(
   func: T,
   delay: number
 ): (...args: Parameters<T>) => void {
@@ -104,7 +104,7 @@ export async function copyToClipboard(text: string): Promise<boolean> {
   try {
     await navigator.clipboard.writeText(text);
     return true;
-  } catch (error) {
+  } catch {
     // Fallback for older browsers
     try {
       const textArea = document.createElement('textarea');
@@ -252,14 +252,18 @@ export function calculatePercentage(value: number, total: number): number {
 /**
  * Deep merge objects
  */
-export function deepMerge<T extends object>(target: T, source: Partial<T>): T {
+export function deepMerge<T extends Record<string, unknown>>(target: T, source: Partial<T>): T {
   const result = { ...target };
   
   for (const key in source) {
-    if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
-      result[key] = deepMerge(result[key] as any, source[key] as any);
+    const sourceValue = source[key];
+    const targetValue = result[key];
+    
+    if (sourceValue && typeof sourceValue === 'object' && !Array.isArray(sourceValue) && 
+        targetValue && typeof targetValue === 'object' && !Array.isArray(targetValue)) {
+      result[key] = deepMerge(targetValue as Record<string, unknown>, sourceValue as Record<string, unknown>) as T[Extract<keyof T, string>];
     } else {
-      result[key] = source[key] as any;
+      result[key] = sourceValue as T[Extract<keyof T, string>];
     }
   }
   
@@ -307,7 +311,7 @@ export const localStorage = {
   }
 };
 
-export default {
+const utils = {
   cn,
   formatDate,
   formatNumber,
@@ -330,3 +334,5 @@ export default {
   deepMerge,
   localStorage,
 };
+
+export default utils;

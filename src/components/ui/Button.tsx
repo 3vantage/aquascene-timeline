@@ -1,9 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
 import { clsx } from 'clsx';
-import { AnimationManager, buttonHover, buttonTap, waterRipple } from '@/lib/animation-config';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'outline' | 'ghost';
@@ -27,17 +25,8 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   ...props
 }) => {
-  const [isClicked, setIsClicked] = useState(false);
-  const animationManager = AnimationManager.getInstance();
-  const config = animationManager.getAnimationConfig();
-
   const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     if (disabled || isLoading) return;
-
-    if (config.enabled) {
-      setIsClicked(true);
-      setTimeout(() => setIsClicked(false), 600);
-    }
 
     // Haptic feedback on supported devices
     if ('vibrate' in navigator) {
@@ -50,7 +39,7 @@ const Button: React.FC<ButtonProps> = ({
   const baseClasses = clsx(
     'relative inline-flex items-center justify-center font-medium rounded-lg transition-all duration-200',
     'focus:outline-none focus-visible:ring-3 focus-visible:ring-accent-emerald focus-visible:ring-offset-2',
-    'disabled:cursor-not-allowed overflow-hidden',
+    'disabled:cursor-not-allowed overflow-hidden hover:scale-105 active:scale-95',
     {
       'w-full': fullWidth,
       'cursor-not-allowed opacity-60': disabled || isLoading,
@@ -71,28 +60,18 @@ const Button: React.FC<ButtonProps> = ({
     xl: 'px-10 py-5 text-xl h-16'
   };
 
-  const motionProps = config.enabled ? {
-    whileHover: buttonHover,
-    whileTap: buttonTap,
-    initial: { scale: 1 },
-    animate: { scale: 1 }
-  } : {};
-
   return (
-    <motion.button
+    <button
       className={clsx(baseClasses, variantClasses[variant], sizeClasses[size], className)}
       disabled={disabled || isLoading}
       onClick={handleClick}
-      {...motionProps}
       {...props}
     >
       {/* Button content */}
       <span className="flex items-center justify-center gap-2 relative z-10">
         {isLoading ? (
-          <motion.div
-            className="w-5 h-5 border-2 border-current border-t-transparent rounded-full"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+          <div
+            className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"
           />
         ) : (
           <>
@@ -103,41 +82,14 @@ const Button: React.FC<ButtonProps> = ({
         )}
       </span>
 
-      {/* Ripple effect on click */}
-      <AnimatePresence>
-        {isClicked && config.enabled && (
-          <motion.div
-            className="absolute inset-0 bg-white/20 rounded-lg pointer-events-none"
-            variants={waterRipple}
-            initial="initial"
-            animate="animate"
-            exit="initial"
-          />
-        )}
-      </AnimatePresence>
-
-      {/* Shimmer effect for primary buttons */}
-      {variant === 'primary' && config.enabled && (
-        <motion.div
-          className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 pointer-events-none"
-          animate={{
-            x: ['-100%', '100%']
-          }}
-          transition={{
-            duration: 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: Math.random() * 3
-          }}
-        />
-      )}
-
       {/* Loading overlay */}
       {isLoading && (
         <div className="absolute inset-0 bg-current/10 rounded-lg" />
       )}
-    </motion.button>
+    </button>
   );
 };
+
+Button.displayName = 'Button';
 
 export default Button;

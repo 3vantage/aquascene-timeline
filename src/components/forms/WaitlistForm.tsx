@@ -41,8 +41,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ className = '' }) => {
     handleSubmit,
     control,
     formState: { errors, isValid },
-    reset,
-    watch
+    reset
   } = useForm<WaitlistFormData>({
     resolver: zodResolver(waitlistSchema),
     mode: 'onChange',
@@ -98,11 +97,11 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ className = '' }) => {
   ];
 
   const interestOptions = [
-    { id: '3d_design', label: t('interests.3d_design') },
-    { id: 'calculations', label: t('interests.calculations') },
-    { id: 'community', label: t('interests.community') },
-    { id: 'mobile_app', label: t('interests.mobile_app') },
-    { id: 'ai_assistant', label: t('interests.ai_assistant') },
+    { id: '3d_design' as const, label: t('interests.3d_design') },
+    { id: 'calculations' as const, label: t('interests.calculations') },
+    { id: 'community' as const, label: t('interests.community') },
+    { id: 'mobile_app' as const, label: t('interests.mobile_app') },
+    { id: 'ai_assistant' as const, label: t('interests.ai_assistant') },
   ];
 
   const handleShare = async () => {
@@ -271,7 +270,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ className = '' }) => {
                 render={({ field }) => (
                   <Checkbox
                     id={option.id}
-                    checked={field.value?.includes(option.id as any)}
+                    checked={field.value?.includes(option.id)}
                     onChange={(checked) => {
                       const currentValues = field.value || [];
                       if (checked) {
@@ -369,5 +368,7 @@ const WaitlistForm: React.FC<WaitlistFormProps> = ({ className = '' }) => {
     </motion.form>
   );
 };
+
+WaitlistForm.displayName = 'WaitlistForm';
 
 export default WaitlistForm;

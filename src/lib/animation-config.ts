@@ -61,7 +61,7 @@ export class AnimationManager {
     }
     
     // Check device memory
-    if ('deviceMemory' in navigator && (navigator as any).deviceMemory <= 4) {
+    if ('deviceMemory' in navigator && (navigator as Navigator & { deviceMemory?: number }).deviceMemory && (navigator as Navigator & { deviceMemory?: number }).deviceMemory! <= 4) {
       return true;
     }
     
@@ -70,7 +70,7 @@ export class AnimationManager {
   
   private isSlowConnection(): boolean {
     if ('connection' in navigator) {
-      const connection = (navigator as any).connection;
+      const connection = (navigator as Navigator & { connection?: { effectiveType?: string } }).connection;
       return connection?.effectiveType === 'slow-2g' || connection?.effectiveType === '2g';
     }
     return false;
@@ -83,7 +83,7 @@ export class AnimationManager {
     });
   }
   
-  getAnimationConfig(animationType: string = 'default'): AnimationConfig {
+  getAnimationConfig(): AnimationConfig {
     const configs: Record<PerformanceMode, AnimationConfig> = {
       full: {
         duration: 0.6,
@@ -161,8 +161,7 @@ export const staggerItem = {
   initial: { opacity: 0, y: 20 },
   animate: { 
     opacity: 1, 
-    y: 0,
-    transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] }
+    y: 0
   }
 };
 

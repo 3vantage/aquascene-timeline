@@ -56,7 +56,9 @@ const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(({
       'bg-white border-error hover:border-error': 
         variant === 'default' && !checked && error && !disabled,
       'bg-error border-error text-white': 
-        variant === 'default' && checked && error,
+        (variant === 'default' && checked && error) || 
+        (variant === 'glass' && checked && error) || 
+        (variant === 'underwater' && checked && error),
       
       // Glass variant
       'glass-underwater border-white/30 hover:border-accent-emerald/50': 
@@ -65,8 +67,6 @@ const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(({
         variant === 'glass' && checked && !error,
       'glass-underwater border-error/50 hover:border-error': 
         variant === 'glass' && !checked && error && !disabled,
-      'bg-error border-error text-white': 
-        variant === 'glass' && checked && error,
       
       // Underwater variant
       'glass-deep-water border-primary/30 hover:border-accent-emerald': 
@@ -75,8 +75,6 @@ const Checkbox = forwardRef<HTMLButtonElement, CheckboxProps>(({
         variant === 'underwater' && checked && !error,
       'glass-deep-water border-error/50 hover:border-error': 
         variant === 'underwater' && !checked && error && !disabled,
-      'bg-error border-error text-white': 
-        variant === 'underwater' && checked && error,
         
       'opacity-50 cursor-not-allowed': disabled,
       'cursor-pointer': !disabled,

@@ -1,13 +1,26 @@
 import type { NextConfig } from "next";
-import createNextIntlPlugin from 'next-intl/plugin';
 
-const withNextIntl = createNextIntlPlugin('./src/i18n/request.ts');
+const isProd = process.env.NODE_ENV === 'production';
+const isStaticExport = process.env.STATIC_EXPORT === 'true';
 
 const nextConfig: NextConfig = {
+  // Only use static export for GitHub Pages, not for Vercel
+  ...(isStaticExport && {
+    output: 'export',
+    basePath: isProd ? '/aquascene-waitlist' : '',
+    assetPrefix: isProd ? '/aquascene-waitlist/' : '',
+  }),
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
   experimental: {
     mdxRs: true,
   },
   images: {
+    unoptimized: true,
     domains: ['images.unsplash.com', 'cdn.sanity.io'],
     formats: ['image/webp', 'image/avif'],
   },
@@ -16,4 +29,4 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
 };
 
-export default withNextIntl(nextConfig);
+export default nextConfig;

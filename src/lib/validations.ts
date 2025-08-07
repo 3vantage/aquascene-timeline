@@ -14,7 +14,7 @@ export const waitlistSchema = z.object({
     .max(255, 'Email must be less than 255 characters'),
   
   experience: z.enum(['beginner', 'intermediate', 'advanced', 'professional'], {
-    required_error: 'Please select your experience level'
+    message: 'Please select your experience level'
   }),
   
   interests: z
@@ -106,8 +106,8 @@ export const commentSchema = z.object({
 export type CommentFormData = z.infer<typeof commentSchema>;
 
 // Validation error formatter
-export const formatValidationErrors = (error: z.ZodError) => {
-  return error.errors.reduce((acc, curr) => {
+export const formatValidationErrors = (error: z.ZodError): Record<string, string> => {
+  return error.issues.reduce((acc: Record<string, string>, curr) => {
     const path = curr.path.join('.');
     acc[path] = curr.message;
     return acc;
@@ -153,7 +153,7 @@ export const createRateLimitCheck = (maxAttempts: number, windowMs: number) => {
   };
 };
 
-export default {
+const validations = {
   waitlistSchema,
   newsletterSchema,
   contactSchema,
@@ -164,3 +164,5 @@ export default {
   sanitizeInput,
   createRateLimitCheck,
 };
+
+export default validations;

@@ -4,7 +4,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/Button';
-import { fadeInUp, staggerContainer, staggerItem } from '@/lib/animation-config';
+import { staggerContainer, staggerItem } from '@/lib/animation-config';
 import { ArrowRightIcon, SparklesIcon } from '@heroicons/react/24/outline';
 
 const HeroSection: React.FC = () => {
@@ -259,5 +259,7 @@ const HeroSection: React.FC = () => {
     </section>
   );
 };
+
+HeroSection.displayName = 'HeroSection';
 
 export default HeroSection;

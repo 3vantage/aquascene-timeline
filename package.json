@@ -6,7 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "security:check": "node scripts/validate-security.js",
+    "security:env": "cp .env.example .env.local && echo 'Please update .env.local with your actual values'"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.7",
@@ -41,7 +43,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^20",
+    "@types/node": "^20.19.9",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",

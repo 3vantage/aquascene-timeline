@@ -58,6 +58,9 @@
       "permanent": false
     }
   ],
+  "env": {
+    "STATIC_EXPORT": "false"
+  },
   "rewrites": [
     {
       "source": "/sitemap.xml",

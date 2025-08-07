@@ -171,8 +171,6 @@ const Select = forwardRef<HTMLButtonElement, SelectProps>(({
           disabled={disabled}
           aria-expanded={isOpen}
           aria-haspopup="listbox"
-          aria-required={required}
-          aria-invalid={!!error}
         >
           <span className={textClasses}>
             {selectedOption ? selectedOption.label : placeholder}

@@ -1,4 +1,3 @@
-import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
 import { Metadata } from 'next';
 import HeroSection from '@/components/sections/HeroSection';
@@ -8,11 +7,12 @@ import TestimonialsSection from '@/components/sections/TestimonialsSection';
 import BubbleSystem from '@/components/animations/BubbleSystem';
 
 interface PageProps {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }
 
 // Generate metadata for SEO
-export async function generateMetadata({ params: { locale } }: PageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { locale } = await params;
   const t = await getTranslations({ locale, namespace: 'metadata' });
   
   return {
@@ -62,7 +62,8 @@ export async function generateMetadata({ params: { locale } }: PageProps): Promi
   };
 }
 
-export default function HomePage({ params: { locale } }: PageProps) {
+async function HomePage({ params }: PageProps) {
+  const { locale } = await params;
   return (
     <main className="relative">
       {/* Underwater background effects */}
@@ -114,3 +115,7 @@ export default function HomePage({ params: { locale } }: PageProps) {
     </main>
   );
 }
+
+HomePage.displayName = 'HomePage';
+
+export default HomePage;
