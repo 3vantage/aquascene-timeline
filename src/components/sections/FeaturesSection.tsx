@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useTranslations, useLocale } from 'next-intl';
 import { useRef } from 'react';
 import { staggerContainer, staggerItem } from '@/lib/animation-config';
 import { 
@@ -29,36 +28,34 @@ interface Feature {
 }
 
 const FeaturesSection: React.FC = () => {
-  const t = useTranslations('features');
-  const locale = useLocale();
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
   
-  // Check if user is in Hungarian locale for Green Aqua partnership
-  const isHungarian = locale === 'hu';
+  // Show Green Aqua partnership feature for all users
+  const isHungarian = true;
 
   const baseFeatures: Feature[] = [
     {
       icon: CubeIcon,
-      title: t('design.title'),
-      description: t('design.description'),
-      benefit: t('design.benefit'),
+      title: '3D Reality Preview',
+      description: 'See your exact tank with real plant growth patterns. Know if plants will thrive in your specific conditions.',
+      benefit: 'Save 60% on plant costs',
       color: 'from-cyan-500 to-emerald-500',
       delay: 0
     },
     {
       icon: CalculatorIcon,
-      title: t('calculator.title'),
-      description: t('calculator.description'),
-      benefit: t('calculator.benefit'),
+      title: 'Smart Cost Calculator',
+      description: 'Get precise pricing from Bulgarian and Hungarian suppliers. No more guessing or overspending.',
+      benefit: 'Plan your exact budget',
       color: 'from-emerald-500 to-green-500',
       delay: 0.2
     },
     {
       icon: UsersIcon,
-      title: t('community.title'),
-      description: t('community.description'),
-      benefit: t('community.benefit'),
+      title: 'Regional Expert Network',
+      description: 'Connect with top aquascapers in Sofia, Budapest, and across Central Europe. Get local advice that works.',
+      benefit: 'Learn from the best nearby',
       color: 'from-blue-500 to-cyan-500',
       delay: 0.4
     }
@@ -69,9 +66,9 @@ const FeaturesSection: React.FC = () => {
     ...baseFeatures,
     {
       icon: HandshakeIcon,
-      title: t('greenaqua.title'),
-      description: t('greenaqua.description'),
-      benefit: t('greenaqua.benefit'),
+      title: 'Green Aqua Partnership',
+      description: 'Direct integration with Europe\'s leading aquascaping store. Get exclusive discounts and priority access to new plants.',
+      benefit: '10% discount for members',
       color: 'from-orange-500 to-red-500',
       delay: 0.6,
       isPartnership: true
@@ -135,11 +132,11 @@ const FeaturesSection: React.FC = () => {
             </motion.div>
             
             <h2 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 text-balance">
-              {t('title')}
+              Stop Wasting Money on Failed Aquascapes
             </h2>
             
             <p className="text-xl text-cyan-100/80 max-w-3xl mx-auto text-pretty">
-              {t('subtitle')}
+              See exactly what works before you spend a single lev or forint
             </p>
           </motion.div>
 

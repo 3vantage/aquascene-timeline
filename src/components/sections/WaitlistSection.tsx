@@ -2,14 +2,12 @@
 
 import React from 'react';
 import { motion, useInView } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 import { useRef } from 'react';
 import WaitlistForm from '@/components/forms/WaitlistForm';
 import { staggerContainer, staggerItem } from '@/lib/animation-config';
 import { SparklesIcon, UserGroupIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
 
 const WaitlistSection: React.FC = () => {
-  const t = useTranslations('waitlist');
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.2 });
 
@@ -76,14 +74,14 @@ const WaitlistSection: React.FC = () => {
                 variants={staggerItem}
                 className="text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 text-balance"
               >
-                {t('title')}
+                Join 2,500+ Smart Aquascapers
               </motion.h2>
 
               <motion.p
                 variants={staggerItem}
                 className="text-xl text-white/80 mb-8 text-pretty"
               >
-                {t('subtitle')}
+                Stop guessing. Start designing with confidence.
               </motion.p>
 
               {/* Stats */}

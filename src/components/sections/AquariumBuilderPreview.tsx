@@ -2,7 +2,6 @@
 
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence, useDragControls } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 import { 
   CubeTransparentIcon, 
   SparklesIcon, 
@@ -31,7 +30,6 @@ interface AquariumItem {
 }
 
 const AquariumBuilderPreview: React.FC<{ onClose: () => void }> = ({ onClose }) => {
-  const t = useTranslations('demo');
   const [placedItems, setPlacedItems] = useState<DraggedItem[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<'plant' | 'rock' | 'driftwood'>('plant');
   const [totalCost, setTotalCost] = useState(0);

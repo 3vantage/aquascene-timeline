@@ -2,14 +2,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTranslations } from 'next-intl';
 import Button from '@/components/ui/Button';
 import AquariumBuilderPreview from '@/components/sections/AquariumBuilderPreview';
 import { staggerContainer, staggerItem } from '@/lib/animation-config';
 import { ArrowRightIcon, SparklesIcon, PlayIcon, CubeTransparentIcon } from '@heroicons/react/24/outline';
 
 const HeroSection: React.FC = () => {
-  const t = useTranslations('hero');
   const [isDemoActive, setIsDemoActive] = useState(false);
   const [aquascaperCount, setAquascaperCount] = useState(2487);
 
