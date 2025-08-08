@@ -57,7 +57,7 @@ export function UnderwaterEffects({ intensity = 'medium', isMobile = false }: Un
               transform: 'rotate(15deg) skewX(-10deg)',
             }}
             animate={{
-              x: [-100, window.innerWidth + 100],
+              x: [-100, typeof window !== 'undefined' ? window.innerWidth + 100 : 1000],
               opacity: [0, 0.3, 0],
             }}
             transition={{

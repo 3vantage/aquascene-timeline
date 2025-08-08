@@ -156,20 +156,26 @@ export function SimpleTimelineContainer() {
   // Detect mobile device
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
+      if (typeof window !== 'undefined') {
+        setIsMobile(window.innerWidth < 768)
+      }
     }
     
     checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
+    if (typeof window !== 'undefined') {
+      window.addEventListener('resize', checkMobile)
+      return () => window.removeEventListener('resize', checkMobile)
+    }
   }, [])
 
   // Preload next images for smoother transitions
   useEffect(() => {
     const preloadImages = () => {
-      for (let i = currentStep; i < Math.min(currentStep + 3, timelineSteps.length); i++) {
-        const img = new globalThis.Image()
-        img.src = timelineSteps[i].imageUrl
+      if (typeof window !== 'undefined') {
+        for (let i = currentStep; i < Math.min(currentStep + 3, timelineSteps.length); i++) {
+          const img = new globalThis.Image()
+          img.src = timelineSteps[i].imageUrl
+        }
       }
     }
     preloadImages()
@@ -218,14 +224,16 @@ export function SimpleTimelineContainer() {
       setCompletedSteps(Array.from({ length: step }, (_, i) => i))
       
       // Announce step change for screen readers
-      const announcement = `Now viewing step ${step + 1}: ${timelineSteps[step].title}`
-      const ariaLive = document.createElement('div')
-      ariaLive.setAttribute('aria-live', 'polite')
-      ariaLive.setAttribute('aria-atomic', 'true')
-      ariaLive.className = 'sr-only'
-      ariaLive.textContent = announcement
-      document.body.appendChild(ariaLive)
-      setTimeout(() => document.body.removeChild(ariaLive), 1000)
+      if (typeof window !== 'undefined') {
+        const announcement = `Now viewing step ${step + 1}: ${timelineSteps[step].title}`
+        const ariaLive = document.createElement('div')
+        ariaLive.setAttribute('aria-live', 'polite')
+        ariaLive.setAttribute('aria-atomic', 'true')
+        ariaLive.className = 'sr-only'
+        ariaLive.textContent = announcement
+        document.body.appendChild(ariaLive)
+        setTimeout(() => document.body.removeChild(ariaLive), 1000)
+      }
     }
   }
 
@@ -316,15 +324,15 @@ export function SimpleTimelineContainer() {
       />
       {/* Hero Section */}
       <motion.section 
-        className="pt-12 pb-8 md:pt-20 md:pb-16 relative z-10"
+        className="pt-8 pb-6 sm:pt-12 sm:pb-8 md:pt-20 md:pb-16 relative z-10 px-4 sm:px-0"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
         style={{ y: parallaxY }}
       >
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-2 sm:px-4 text-center">
           <motion.h1 
-            className="font-display font-bold text-3xl sm:text-4xl md:text-6xl lg:text-7xl mb-4 md:mb-6"
+            className="font-display font-bold text-2xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl mb-3 sm:mb-4 md:mb-6 leading-tight"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
@@ -362,13 +370,13 @@ export function SimpleTimelineContainer() {
           </motion.h1>
           
           <motion.p 
-            className="text-base sm:text-lg md:text-xl text-slate-300 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-2"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 mb-4 sm:mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-1 sm:px-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             Follow the complete journey from empty tank to thriving aquatic ecosystem. 
-            Experience each stage with interactive animations and expert guidance.
+            <span className="hidden sm:inline">Experience each stage with interactive animations and expert guidance.</span>
           </motion.p>
           
           {/* Mobile swipe hint */}
@@ -389,15 +397,15 @@ export function SimpleTimelineContainer() {
           
           {/* Controls */}
           <motion.div 
-            className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mb-6 md:mb-8"
+            className="flex flex-col sm:flex-row justify-center items-center gap-3 sm:gap-4 mb-4 sm:mb-6 md:mb-8 px-2"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
             <motion.button
               onClick={isAutoPlaying ? pausePlay : startAutoPlay}
-              className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-blue-600 transition-all shadow-lg flex items-center gap-2 sm:gap-3 min-h-[44px] w-full sm:w-auto justify-center"
-              whileHover={{ scale: 1.05 }}
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg hover:from-cyan-600 hover:to-blue-600 transition-all shadow-lg flex items-center gap-2 sm:gap-3 min-h-[48px] w-full sm:w-auto justify-center touch-manipulation"
+              whileHover={{ scale: isMobile ? 1 : 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label={isAutoPlaying ? 'Pause automatic timeline progression' : 'Start automatic timeline progression'}
             >
@@ -417,8 +425,8 @@ export function SimpleTimelineContainer() {
             </motion.button>
             <motion.button
               onClick={resetTimeline}
-              className="glass-panel text-white px-4 sm:px-6 py-3 sm:py-4 rounded-full font-semibold hover:bg-white/20 transition-all flex items-center gap-2 min-h-[44px] w-full sm:w-auto justify-center"
-              whileHover={{ scale: 1.05 }}
+              className="glass-panel text-white px-4 sm:px-6 py-3 sm:py-4 rounded-full font-semibold hover:bg-white/20 transition-all flex items-center gap-2 min-h-[48px] w-full sm:w-auto justify-center touch-manipulation"
+              whileHover={{ scale: isMobile ? 1 : 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label="Reset timeline to beginning"
             >
@@ -438,13 +446,13 @@ export function SimpleTimelineContainer() {
       >
         <div className="container mx-auto px-2 sm:px-4">
           <div className="max-w-6xl mx-auto">
-            <div className="relative">
+            <div className="relative px-2 sm:px-0">
               {/* Timeline Line */}
-              <div className="absolute left-0 right-0 top-1/2 h-0.5 sm:h-1 bg-slate-700 rounded-full"></div>
+              <div className="absolute left-2 right-2 sm:left-0 sm:right-0 top-1/2 h-0.5 sm:h-1 bg-slate-700 rounded-full"></div>
               <motion.div 
-                className="absolute left-0 top-1/2 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
+                className="absolute left-2 sm:left-0 top-1/2 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
                 initial={{ width: 0 }}
-                animate={{ width: `${(currentStep / (timelineSteps.length - 1)) * 100}%` }}
+                animate={{ width: `calc(${(currentStep / (timelineSteps.length - 1)) * 100}% - ${isMobile ? '8px' : '0px'})` }}
                 transition={{ duration: 1, ease: "easeInOut" }}
               />
               
@@ -462,7 +470,7 @@ export function SimpleTimelineContainer() {
                     aria-label={`Go to step ${index + 1}: ${step.title}. ${completedSteps.includes(index) ? 'Completed' : index === currentStep ? 'Current step' : 'Not started'}`}
                     aria-current={index === currentStep ? 'step' : undefined}
                   >
-                    <div className={`w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 rounded-full border-2 sm:border-4 flex items-center justify-center transition-all duration-300 ${
+                    <div className={`w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 rounded-full border-2 sm:border-3 md:border-4 flex items-center justify-center transition-all duration-300 ${
                       completedSteps.includes(index) 
                         ? 'bg-emerald-500 border-emerald-400 text-white shadow-lg shadow-emerald-500/30' 
                         : index === currentStep
@@ -479,17 +487,17 @@ export function SimpleTimelineContainer() {
                     </div>
                     
                     {/* Step Label */}
-                    <div className="absolute top-14 sm:top-16 md:top-20 left-1/2 transform -translate-x-1/2 text-center">
+                    <div className="absolute top-14 sm:top-16 md:top-20 left-1/2 transform -translate-x-1/2 text-center w-16 sm:w-20">
                       <div className={`font-semibold text-xs sm:text-sm ${
                         index === currentStep ? 'text-white' : 'text-slate-400'
                       }`}>
-                        Step {index + 1}
+                        <span className="hidden xs:inline">Step </span>{index + 1}
                       </div>
-                      <div className={`text-xs mt-1 whitespace-nowrap ${
+                      <div className={`text-xs mt-1 whitespace-nowrap overflow-hidden text-ellipsis ${
                         index === currentStep ? 'text-cyan-300' : 'text-slate-500'
                       }`}>
                         <span className="hidden sm:inline">{step.title}</span>
-                        <span className="sm:hidden">{step.title.split(' ')[0]}</span>
+                        <span className="sm:hidden text-xs">{step.title.split(' ')[0]}</span>
                       </div>
                     </div>
                   </motion.button>
@@ -522,7 +530,7 @@ export function SimpleTimelineContainer() {
 
       {/* Main Content */}
       <motion.section 
-        className="py-8 md:py-16 relative z-10"
+        className="py-6 sm:py-8 md:py-16 relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 1 }}
@@ -530,7 +538,7 @@ export function SimpleTimelineContainer() {
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <motion.div 
-              className="grid lg:grid-cols-2 gap-8 md:gap-12 items-center"
+              className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 md:gap-12 items-center"
               drag={!isMobile ? "x" : false}
               dragConstraints={{ left: 0, right: 0 }}
               onDragEnd={handleDragEnd}
@@ -543,27 +551,27 @@ export function SimpleTimelineContainer() {
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6 }}
-                className="space-y-6 md:space-y-8 order-2 lg:order-1"
+                className="space-y-4 sm:space-y-6 md:space-y-8 order-2 lg:order-1 px-2 sm:px-0"
               >
                 <div>
-                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 mb-6">
-                    <div className={`w-12 h-12 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${currentStepData.bgColor} flex items-center justify-center flex-shrink-0`}>
+                  <div className="flex flex-col sm:flex-row sm:items-start gap-3 sm:gap-4 mb-4 sm:mb-6">
+                    <div className={`w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-gradient-to-br ${currentStepData.bgColor} flex items-center justify-center flex-shrink-0 mx-auto sm:mx-0`}>
                       <div className={`${currentStepData.color} flex items-center justify-center`}>
                         <div className="w-6 h-6 sm:w-8 sm:h-8">
                           {currentStepData.icon}
                         </div>
                       </div>
                     </div>
-                    <div className="flex-1">
-                      <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-white mb-2">
+                    <div className="flex-1 text-center sm:text-left">
+                      <h2 className="font-display font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white mb-2 leading-tight">
                         {currentStepData.title}
                       </h2>
-                      <div className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
-                        <div className="flex items-center gap-1">
+                      <div className="flex flex-col sm:flex-row sm:flex-wrap sm:items-center justify-center sm:justify-start gap-1 sm:gap-2 text-xs sm:text-sm text-slate-400">
+                        <div className="flex items-center justify-center sm:justify-start gap-1">
                           <Clock className="w-3 h-3 sm:w-4 sm:h-4" />
                           <span>{currentStepData.duration}</span>
                         </div>
-                        <span>•</span>
+                        <span className="hidden sm:inline">•</span>
                         <span className={
                           currentStepData.difficulty === 'Easy' ? 'text-green-400' :
                           currentStepData.difficulty === 'Medium' ? 'text-yellow-400' : 'text-red-400'
@@ -572,22 +580,22 @@ export function SimpleTimelineContainer() {
                     </div>
                   </div>
                   
-                  <p className="text-base md:text-lg text-slate-200 leading-relaxed mb-4 md:mb-6">
+                  <p className="text-sm sm:text-base md:text-lg text-slate-200 leading-relaxed mb-3 sm:mb-4 md:mb-6 text-center sm:text-left">
                     {currentStepData.description}
                   </p>
                   
-                  <p className="text-sm md:text-base text-slate-300 leading-relaxed">
+                  <p className="text-xs sm:text-sm md:text-base text-slate-300 leading-relaxed text-center sm:text-left">
                     {currentStepData.detailedDescription}
                   </p>
                 </div>
 
                 {/* Navigation */}
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 px-2 sm:px-0">
                   <motion.button
                     onClick={previousStep}
                     disabled={currentStep === 0 || isAutoPlaying}
-                    className="px-4 sm:px-6 py-3 bg-slate-700 text-white rounded-full font-semibold hover:bg-slate-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[44px]"
-                    whileHover={{ scale: currentStep === 0 || isAutoPlaying ? 1 : 1.05 }}
+                    className="px-4 sm:px-6 py-3 bg-slate-700 text-white rounded-full font-semibold hover:bg-slate-600 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 min-h-[48px] touch-manipulation"
+                    whileHover={{ scale: currentStep === 0 || isAutoPlaying || isMobile ? 1 : 1.05 }}
                     whileTap={{ scale: currentStep === 0 || isAutoPlaying ? 1 : 0.95 }}
                   >
                     <ChevronLeft className="w-4 h-4" />
@@ -597,8 +605,8 @@ export function SimpleTimelineContainer() {
                   <motion.button
                     onClick={nextStep}
                     disabled={currentStep === timelineSteps.length - 1 || isAutoPlaying}
-                    className="px-4 sm:px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed min-h-[44px]"
-                    whileHover={{ scale: currentStep === timelineSteps.length - 1 || isAutoPlaying ? 1 : 1.05 }}
+                    className="px-4 sm:px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-500 text-white rounded-full font-semibold hover:from-cyan-600 hover:to-blue-600 transition-all flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed min-h-[48px] touch-manipulation"
+                    whileHover={{ scale: currentStep === timelineSteps.length - 1 || isAutoPlaying || isMobile ? 1 : 1.05 }}
                     whileTap={{ scale: currentStep === timelineSteps.length - 1 || isAutoPlaying ? 1 : 0.95 }}
                   >
                     <span className="hidden sm:inline">Next Step</span>
@@ -614,9 +622,9 @@ export function SimpleTimelineContainer() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="relative order-1 lg:order-2"
+                className="relative order-1 lg:order-2 px-4 sm:px-2 md:px-0"
               >
-                <div className="aspect-square max-w-sm sm:max-w-md mx-auto relative">
+                <div className="aspect-square max-w-xs sm:max-w-sm md:max-w-md mx-auto relative">
                   {/* Enhanced Tank Frame with Glass Effects */}
                   <div className="absolute inset-0 border-4 sm:border-6 md:border-8 border-slate-600 rounded-lg overflow-hidden shadow-2xl underwater-glow">
                     {/* Glass reflection overlay */}
@@ -721,12 +729,12 @@ export function SimpleTimelineContainer() {
                   </div>
                 </div>
                 
-                {/* Current Step Highlight */}
-                <div className="mt-4 md:mt-6 text-center">
-                  <h3 className="font-bold text-lg sm:text-xl md:text-2xl text-white mb-2">
+                {/* Current Step Highlight - Mobile Only */}
+                <div className="mt-4 md:mt-6 text-center lg:hidden">
+                  <h3 className="font-bold text-base sm:text-lg md:text-xl text-white mb-2">
                     {currentStepData.title}
                   </h3>
-                  <p className="text-sm md:text-base text-slate-300 px-2">
+                  <p className="text-xs sm:text-sm text-slate-300 px-2 leading-relaxed">
                     {currentStepData.description}
                   </p>
                 </div>
@@ -738,24 +746,24 @@ export function SimpleTimelineContainer() {
 
       {/* Call to Action */}
       <motion.section 
-        className="py-12 md:py-24 relative z-10"
+        className="py-8 sm:py-12 md:py-24 relative z-10"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8, delay: 1.2 }}
       >
         <div className="container mx-auto px-4">
-          <div className="max-w-2xl mx-auto text-center glass-panel rounded-2xl p-6 md:p-8">
-            <h2 className="font-display font-bold text-2xl sm:text-3xl md:text-4xl text-white mb-4 md:mb-6">
+          <div className="max-w-2xl mx-auto text-center glass-panel rounded-2xl p-4 sm:p-6 md:p-8">
+            <h2 className="font-display font-bold text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white mb-3 sm:mb-4 md:mb-6 leading-tight">
               Ready to Start Your Journey?
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-slate-300 mb-6 md:mb-8 leading-relaxed">
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 mb-4 sm:mb-6 md:mb-8 leading-relaxed px-2 sm:px-0">
               Transform your vision into a living aquatic masterpiece. 
-              Get personalized guidance and premium supplies.
+              <span className="hidden sm:inline">Get personalized guidance and premium supplies.</span>
             </p>
             
             <motion.button
-              className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-base sm:text-lg hover:from-cyan-600 hover:to-blue-600 transition-all shadow-lg w-full sm:w-auto min-h-[44px]"
-              whileHover={{ scale: 1.05 }}
+              className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg hover:from-cyan-600 hover:to-blue-600 transition-all shadow-lg w-full sm:w-auto min-h-[48px] touch-manipulation"
+              whileHover={{ scale: isMobile ? 1 : 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
               Begin Your Aquascape

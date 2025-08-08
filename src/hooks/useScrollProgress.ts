@@ -9,6 +9,8 @@ export const useScrollProgress = (): ScrollProgress => {
   });
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     let lastScrollY = 0;
     let lastTime = Date.now();
 

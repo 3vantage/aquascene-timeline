@@ -19,6 +19,8 @@ const ParticleSystem: React.FC = () => {
   const animationRef = useRef<number>();
 
   useEffect(() => {
+    if (typeof window === 'undefined') return;
+    
     // Generate initial particles
     const generateParticles = () => {
       const newParticles: Particle[] = [];
@@ -235,7 +237,7 @@ const ParticleSystem: React.FC = () => {
 
       {/* Water surface simulation */}
       <motion.div
-        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-aqua-300/20 to-transparent"
+        className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-300/20 to-transparent"
         animate={{
           scaleX: [0.8, 1.2, 0.8],
           opacity: [0.1, 0.3, 0.1]
