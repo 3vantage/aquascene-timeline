@@ -1,11 +1,11 @@
 /** @type {import('next').NextConfig} */
 
-const isProd = process.env.NODE_ENV === 'production'
+const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig = {
   output: 'export',
-  basePath: isProd ? '/aquascene-timeline' : '',
-  assetPrefix: isProd ? '/aquascene-timeline/' : '',
+  basePath: isProd ? '/aquascene-waitlist' : '',
+  assetPrefix: isProd ? '/aquascene-waitlist/' : '',
   trailingSlash: true,
   typescript: {
     ignoreBuildErrors: true,

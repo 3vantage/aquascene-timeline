@@ -1,4 +1,4 @@
-name: Deploy Waitlist to GitHub Pages
+name: Deploy Timeline to GitHub Pages
 
 on:
   push:
@@ -46,7 +46,7 @@ jobs:
       - name: Test build (static export)
         run: npm run build
         env:
-          NEXT_PUBLIC_BASE_PATH: /aquascene-waitlist
+          NEXT_PUBLIC_BASE_PATH: /aquascene-timeline
           STATIC_EXPORT: true
 
   # Build job (only for main/master)
@@ -84,7 +84,7 @@ jobs:
       - name: Build with Next.js (static export)
         run: npm run build
         env:
-          NEXT_PUBLIC_BASE_PATH: /aquascene-waitlist
+          NEXT_PUBLIC_BASE_PATH: /aquascene-timeline
           STATIC_EXPORT: true
           # Email configuration from repository secrets
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
@@ -92,7 +92,7 @@ jobs:
           RESEND_TO_EMAIL: ${{ secrets.RESEND_TO_EMAIL }}
           ADMIN_KEY: ${{ secrets.ADMIN_KEY }}
           # Site configuration
-          NEXT_PUBLIC_SITE_URL: https://3vantage.github.io/aquascene-waitlist
+          NEXT_PUBLIC_SITE_URL: https://3vantage.github.io/aquascene-timeline
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

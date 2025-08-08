@@ -92,23 +92,47 @@ const config: Config = {
       animation: {
         'float': 'float 6s ease-in-out infinite',
         'bubble': 'bubble 8s ease-in-out infinite',
+        'bubble-rise': 'bubble-rise 4s linear infinite',
+        'particle-drift': 'particle-drift 6s ease-in-out infinite',
         'wave': 'wave 3s ease-in-out infinite',
         'ripple': 'ripple 0.6s ease-out',
         'shimmer': 'shimmer 2s ease-in-out infinite',
         'fish-swim': 'fishSwim 8s linear infinite',
         'plant-sway': 'plantSway 4s ease-in-out infinite',
         'light-caustics': 'lightCaustics 8s linear infinite',
+        'water-flow': 'water-flow 8s ease-in-out infinite',
+        'underwater-glow': 'underwater-glow 4s ease-in-out infinite',
+        'light-rays': 'light-rays 6s linear infinite',
+        'gentle-float': 'gentle-float 6s ease-in-out infinite',
+        'pulse-glow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       },
       keyframes: {
         float: {
           '0%, 100%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-20px)' }
         },
+        'gentle-float': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-10px)' }
+        },
         bubble: {
           '0%': { transform: 'translateY(100vh) scale(0)' },
           '10%': { transform: 'translateY(90vh) scale(1)' },
           '90%': { transform: 'translateY(10vh) scale(1)' },
           '100%': { transform: 'translateY(0vh) scale(0)' }
+        },
+        'bubble-rise': {
+          '0%': { transform: 'translateY(100vh) scale(0) rotate(0deg)', opacity: '0' },
+          '10%': { transform: 'translateY(90vh) scale(0.8) rotate(45deg)', opacity: '0.4' },
+          '50%': { transform: 'translateY(50vh) scale(1) rotate(180deg)', opacity: '0.8' },
+          '90%': { transform: 'translateY(10vh) scale(1.2) rotate(315deg)', opacity: '0.4' },
+          '100%': { transform: 'translateY(-10vh) scale(0) rotate(360deg)', opacity: '0' }
+        },
+        'particle-drift': {
+          '0%, 100%': { transform: 'translate(0, 0) scale(0.5) rotate(0deg)', opacity: '0.3' },
+          '25%': { transform: 'translate(20px, -10px) scale(0.8) rotate(90deg)', opacity: '0.7' },
+          '50%': { transform: 'translate(-10px, -20px) scale(1) rotate(180deg)', opacity: '1' },
+          '75%': { transform: 'translate(-20px, -5px) scale(0.8) rotate(270deg)', opacity: '0.7' }
         },
         wave: {
           '0%, 100%': { transform: 'translateX(0px) rotate(0deg)' },

@@ -1,338 +1,201 @@
-import { clsx, type ClassValue } from 'clsx';
-import { twMerge } from 'tailwind-merge';
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 
-/**
- * Utility function to merge Tailwind classes with clsx
- */
 export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+  return twMerge(clsx(inputs))
 }
 
-/**
- * Format date for display
- */
-export function formatDate(date: Date | string, locale: string = 'en'): string {
-  const dateObj = typeof date === 'string' ? new Date(date) : date;
+export function formatDuration(duration: string): string {
+  // Convert duration strings to a more readable format
+  const durationMap: Record<string, string> = {
+    '1-2 hours': '1-2 hrs',
+    '2-4 hours': '2-4 hrs',
+    '30-45 minutes': '30-45 min',
+    '45-60 minutes': '45-60 min',
+    '1-3 hours': '1-3 hrs',
+    '4-6 weeks': '4-6 weeks',
+    '1-2 weeks': '1-2 weeks',
+    'Ongoing': 'Ongoing'
+  }
   
-  return new Intl.DateTimeFormat(locale, {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(dateObj);
+  return durationMap[duration] || duration
 }
 
-/**
- * Format number with locale-specific formatting
- */
-export function formatNumber(number: number, locale: string = 'en'): string {
-  return new Intl.NumberFormat(locale).format(number);
+export function getDifficultyColor(difficulty: 'Easy' | 'Medium' | 'Hard'): string {
+  const colors = {
+    Easy: 'text-green-400',
+    Medium: 'text-yellow-400',
+    Hard: 'text-red-400'
+  }
+  
+  return colors[difficulty] || 'text-slate-400'
 }
 
-/**
- * Truncate text to specified length
- */
-export function truncateText(text: string, length: number = 100): string {
-  if (text.length <= length) return text;
-  return text.substring(0, length).trim() + '...';
+export function getDifficultyBadgeClasses(difficulty: 'Easy' | 'Medium' | 'Hard'): string {
+  const classes = {
+    Easy: 'bg-green-500/20 text-green-300 border-green-500/30',
+    Medium: 'bg-yellow-500/20 text-yellow-300 border-yellow-500/30',
+    Hard: 'bg-red-500/20 text-red-300 border-red-500/30'
+  }
+  
+  return classes[difficulty] || 'bg-slate-500/20 text-slate-300 border-slate-500/30'
 }
 
-/**
- * Generate a slug from text
- */
-export function generateSlug(text: string): string {
-  return text
-    .toLowerCase()
-    .replace(/[^\w\s-]/g, '') // Remove special characters
-    .replace(/[\s_-]+/g, '-') // Replace spaces and underscores with hyphens
-    .replace(/^-+|-+$/g, ''); // Remove leading/trailing hyphens
+export function generateBubbles(count: number = 8) {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    x: Math.random() * 80 + 10, // 10-90% from left
+    y: Math.random() * 60 + 20, // 20-80% from top
+    size: Math.random() * 0.5 + 0.5, // 0.5-1x size
+    delay: Math.random() * 3,
+    duration: Math.random() * 2 + 3 // 3-5 seconds
+  }))
 }
 
-/**
- * Debounce function
- */
-export function debounce<T extends (...args: unknown[]) => unknown>(
+export function generateParticles(count: number = 12) {
+  return Array.from({ length: count }, (_, i) => ({
+    id: i,
+    x: Math.random() * 100,
+    y: Math.random() * 80 + 10,
+    size: Math.random() * 2 + 1,
+    opacity: Math.random() * 0.5 + 0.3,
+    delay: Math.random() * 2,
+    duration: Math.random() * 3 + 2
+  }))
+}
+
+export function easeInOutQuart(t: number): number {
+  return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * (--t) * t * t * t
+}
+
+export function easeOutBack(t: number): number {
+  const c1 = 1.70158
+  const c3 = c1 + 1
+  return 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2)
+}
+
+export function debounce<T extends (...args: any[]) => void>(
   func: T,
-  delay: number
+  wait: number
 ): (...args: Parameters<T>) => void {
-  let timeoutId: NodeJS.Timeout;
+  let timeout: NodeJS.Timeout | null = null
+
+  return (...args: Parameters<T>) => {
+    if (timeout) {
+      clearTimeout(timeout)
+    }
+    
+    timeout = setTimeout(() => {
+      func(...args)
+    }, wait)
+  }
+}
+
+export function throttle<T extends (...args: any[]) => void>(
+  func: T,
+  limit: number
+): (...args: Parameters<T>) => void {
+  let inThrottle: boolean
   
   return (...args: Parameters<T>) => {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => func(...args), delay);
-  };
-}
-
-/**
- * Throttle function
- */
-export function throttle<T extends (...args: unknown[]) => unknown>(
-  func: T,
-  delay: number
-): (...args: Parameters<T>) => void {
-  let lastCall = 0;
-  
-  return (...args: Parameters<T>) => {
-    const now = Date.now();
-    if (now - lastCall >= delay) {
-      lastCall = now;
-      func(...args);
-    }
-  };
-}
-
-/**
- * Check if code is running in browser
- */
-export function isBrowser(): boolean {
-  return typeof window !== 'undefined';
-}
-
-/**
- * Get reading time estimate for text
- */
-export function getReadingTime(text: string, wordsPerMinute: number = 200): number {
-  const words = text.trim().split(/\s+/).length;
-  return Math.ceil(words / wordsPerMinute);
-}
-
-/**
- * Copy text to clipboard
- */
-export async function copyToClipboard(text: string): Promise<boolean> {
-  if (!isBrowser()) return false;
-  
-  try {
-    await navigator.clipboard.writeText(text);
-    return true;
-  } catch {
-    // Fallback for older browsers
-    try {
-      const textArea = document.createElement('textarea');
-      textArea.value = text;
-      textArea.style.position = 'fixed';
-      textArea.style.left = '-999999px';
-      textArea.style.top = '-999999px';
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      const result = document.execCommand('copy');
-      document.body.removeChild(textArea);
-      return result;
-    } catch (fallbackError) {
-      console.error('Failed to copy to clipboard:', fallbackError);
-      return false;
+    if (!inThrottle) {
+      func(...args)
+      inThrottle = true
+      setTimeout(() => inThrottle = false, limit)
     }
   }
 }
 
-/**
- * Share content using Web Share API with fallback
- */
-export async function shareContent(shareData: {
-  title?: string;
-  text?: string;
-  url?: string;
-}): Promise<boolean> {
-  if (!isBrowser()) return false;
+export function getRandomColor(colors: string[]): string {
+  return colors[Math.floor(Math.random() * colors.length)]
+}
+
+export function interpolateColor(color1: string, color2: string, factor: number): string {
+  // Simple color interpolation (would need a proper color library for production)
+  return factor < 0.5 ? color1 : color2
+}
+
+export function isReducedMotion(): boolean {
+  if (typeof window === 'undefined') return false
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
+export function isTouchDevice(): boolean {
+  if (typeof window === 'undefined') return false
+  return 'ontouchstart' in window || navigator.maxTouchPoints > 0
+}
+
+export function getViewportSize(): 'mobile' | 'tablet' | 'desktop' | 'wide' {
+  if (typeof window === 'undefined') return 'desktop'
   
-  // Check if Web Share API is supported
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-      return true;
-    } catch (error) {
-      console.error('Web Share API failed:', error);
-    }
-  }
+  const width = window.innerWidth
   
-  // Fallback: copy URL to clipboard
-  if (shareData.url) {
-    return await copyToClipboard(shareData.url);
-  }
+  if (width < 768) return 'mobile'
+  if (width < 1024) return 'tablet'
+  if (width < 1400) return 'desktop'
+  return 'wide'
+}
+
+export function smoothScrollTo(element: HTMLElement | null, options?: ScrollIntoViewOptions) {
+  if (!element) return
   
-  return false;
+  element.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center',
+    ...options
+  })
 }
 
-/**
- * Validate email format
- */
-export function isValidEmail(email: string): boolean {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  return emailRegex.test(email);
+export function formatStepId(title: string): string {
+  return title.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')
 }
 
-/**
- * Generate random ID
- */
-export function generateId(length: number = 8): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  for (let i = 0; i < length; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
+export function calculateProgress(currentStep: number, totalSteps: number): number {
+  return Math.round((currentStep / (totalSteps - 1)) * 100)
 }
 
-/**
- * Format file size
- */
-export function formatFileSize(bytes: number): string {
-  if (bytes === 0) return '0 Bytes';
-  
-  const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+export function getNextStep(currentStep: number, totalSteps: number): number | null {
+  return currentStep < totalSteps - 1 ? currentStep + 1 : null
 }
 
-/**
- * Get URL parameters
- */
-export function getUrlParams(): URLSearchParams {
-  if (!isBrowser()) return new URLSearchParams();
-  return new URLSearchParams(window.location.search);
+export function getPreviousStep(currentStep: number): number | null {
+  return currentStep > 0 ? currentStep - 1 : null
 }
 
-/**
- * Scroll to element smoothly
- */
-export function scrollToElement(elementId: string, offset: number = 0): void {
-  if (!isBrowser()) return;
-  
-  const element = document.getElementById(elementId);
-  if (element) {
-    const elementPosition = element.getBoundingClientRect().top;
-    const offsetPosition = elementPosition + window.pageYOffset - offset;
-    
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth'
-    });
-  }
+export function validateStepIndex(step: number, totalSteps: number): boolean {
+  return step >= 0 && step < totalSteps
 }
 
-/**
- * Check if element is in viewport
- */
-export function isElementInViewport(element: Element): boolean {
-  if (!isBrowser()) return false;
-  
-  const rect = element.getBoundingClientRect();
-  return (
-    rect.top >= 0 &&
-    rect.left >= 0 &&
-    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-  );
-}
-
-/**
- * Format currency
- */
-export function formatCurrency(
-  amount: number,
-  currency: string = 'USD',
-  locale: string = 'en-US'
-): string {
-  return new Intl.NumberFormat(locale, {
-    style: 'currency',
-    currency: currency,
-  }).format(amount);
-}
-
-/**
- * Calculate percentage
- */
-export function calculatePercentage(value: number, total: number): number {
-  if (total === 0) return 0;
-  return Math.round((value / total) * 100);
-}
-
-/**
- * Deep merge objects
- */
-export function deepMerge<T extends Record<string, unknown>>(target: T, source: Partial<T>): T {
-  const result = { ...target };
-  
-  for (const key in source) {
-    const sourceValue = source[key];
-    const targetValue = result[key];
-    
-    if (sourceValue && typeof sourceValue === 'object' && !Array.isArray(sourceValue) && 
-        targetValue && typeof targetValue === 'object' && !Array.isArray(targetValue)) {
-      result[key] = deepMerge(targetValue as Record<string, unknown>, sourceValue as Record<string, unknown>) as T[Extract<keyof T, string>];
-    } else {
-      result[key] = sourceValue as T[Extract<keyof T, string>];
-    }
-  }
-  
-  return result;
-}
-
-/**
- * Local storage helpers with error handling
- */
-export const localStorage = {
-  get<T>(key: string, defaultValue?: T): T | null {
-    if (!isBrowser()) return defaultValue || null;
-    
-    try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : defaultValue || null;
-    } catch (error) {
-      console.error(`Error reading from localStorage key "${key}":`, error);
-      return defaultValue || null;
-    }
+export const animationVariants = {
+  fadeIn: {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1 }
   },
-  
-  set<T>(key: string, value: T): boolean {
-    if (!isBrowser()) return false;
-    
-    try {
-      window.localStorage.setItem(key, JSON.stringify(value));
-      return true;
-    } catch (error) {
-      console.error(`Error writing to localStorage key "${key}":`, error);
-      return false;
-    }
+  slideUp: {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0 }
   },
-  
-  remove(key: string): boolean {
-    if (!isBrowser()) return false;
-    
-    try {
-      window.localStorage.removeItem(key);
-      return true;
-    } catch (error) {
-      console.error(`Error removing localStorage key "${key}":`, error);
-      return false;
+  slideDown: {
+    hidden: { opacity: 0, y: -30 },
+    visible: { opacity: 1, y: 0 }
+  },
+  slideLeft: {
+    hidden: { opacity: 0, x: 30 },
+    visible: { opacity: 1, x: 0 }
+  },
+  slideRight: {
+    hidden: { opacity: 0, x: -30 },
+    visible: { opacity: 1, x: 0 }
+  },
+  scale: {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: { opacity: 1, scale: 1 }
+  },
+  stagger: {
+    visible: {
+      transition: {
+        staggerChildren: 0.1
+      }
     }
   }
-};
-
-const utils = {
-  cn,
-  formatDate,
-  formatNumber,
-  truncateText,
-  generateSlug,
-  debounce,
-  throttle,
-  isBrowser,
-  getReadingTime,
-  copyToClipboard,
-  shareContent,
-  isValidEmail,
-  generateId,
-  formatFileSize,
-  getUrlParams,
-  scrollToElement,
-  isElementInViewport,
-  formatCurrency,
-  calculatePercentage,
-  deepMerge,
-  localStorage,
-};
-
-export default utils;
+}
