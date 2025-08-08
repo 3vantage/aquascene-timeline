@@ -4,12 +4,15 @@
 
 @layer base {
   :root {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --aqua-primary: 189 100% 56%;
-    --aqua-secondary: 228 100% 74%;
-    --glass-bg: rgba(255, 255, 255, 0.1);
-    --glass-border: rgba(255, 255, 255, 0.2);
+    --background: 0 0% 99.4%; /* Cloud White */
+    --foreground: 218 11% 17%; /* Charcoal text */
+    --primary: 153 65% 20%; /* Deep Forest */
+    --secondary: 202 38% 28%; /* Ocean Depth */
+    --accent: 14 78% 62%; /* Warm Coral */
+    --accent-light: 37 86% 67%; /* Golden Sand */
+    --success: 142 45% 46%; /* Natural green */
+    --glass-bg: rgba(255, 255, 255, 0.9);
+    --glass-border: rgba(27, 67, 50, 0.1);
   }
 
   * {
@@ -21,8 +24,8 @@
   }
 
   body {
-    @apply bg-slate-900 text-slate-100;
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply bg-neutral-50 text-neutral-700;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
   }
 
   /* Custom scrollbar */
@@ -31,25 +34,25 @@
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-slate-800;
+    @apply bg-neutral-200;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-cyan-500 rounded-full;
+    @apply bg-primary rounded-full;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-cyan-400;
+    @apply bg-primary-light;
   }
 }
 
 @layer components {
-  /* Glass morphism utilities */
+  /* Professional glass morphism utilities */
   .glass-panel {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.85);
     backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(27, 67, 50, 0.1);
+    box-shadow: 0 8px 32px rgba(27, 67, 50, 0.15);
   }
 
   .glass-card {
@@ -62,12 +65,12 @@
     transform: translateY(-2px);
   }
 
-  /* Advanced gradient backgrounds */
-  .bg-aqua-gradient {
+  /* Natural gradient backgrounds */
+  .bg-natural-gradient {
     background: linear-gradient(135deg, 
-      rgba(6, 182, 212, 0.8) 0%, 
-      rgba(59, 130, 246, 0.6) 50%, 
-      rgba(147, 51, 234, 0.8) 100%);
+      rgba(27, 67, 50, 0.05) 0%, 
+      rgba(43, 79, 96, 0.05) 50%, 
+      rgba(231, 111, 81, 0.05) 100%);
   }
 
   .bg-mesh-gradient {
@@ -130,19 +133,19 @@
     will-change: background-position;
   }
 
-  /* Button styles with mobile-first approach */
-  .btn-aqua {
-    @apply bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-4 py-3 sm:px-6 rounded-xl font-semibold;
-    @apply hover:from-cyan-600 hover:to-blue-600 transition-all duration-300;
-    @apply transform hover:scale-105 active:scale-95;
+  /* Professional button styles */
+  .btn-primary {
+    @apply bg-accent text-white px-6 py-3 rounded-lg font-semibold;
+    @apply hover:bg-accent-light transition-all duration-300;
+    @apply transform hover:scale-[1.02] active:scale-95;
     @apply shadow-lg hover:shadow-xl;
     @apply min-h-[48px] touch-manipulation;
   }
 
-  .btn-glass {
-    @apply glass-panel text-white px-4 py-3 sm:px-6 rounded-xl font-semibold;
-    @apply hover:bg-white/20 transition-all duration-300;
-    @apply transform hover:scale-105 active:scale-95;
+  .btn-secondary {
+    @apply glass-panel text-primary px-6 py-3 rounded-lg font-semibold border border-primary/20;
+    @apply hover:bg-primary/5 hover:border-primary/40 transition-all duration-300;
+    @apply transform hover:scale-[1.02] active:scale-95;
     @apply min-h-[48px] touch-manipulation;
   }
 

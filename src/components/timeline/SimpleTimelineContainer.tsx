@@ -310,7 +310,7 @@ export function SimpleTimelineContainer() {
   return (
     <div 
       ref={containerRef}
-      className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900/20 to-indigo-900/20 relative overflow-x-hidden"
+      className="min-h-screen bg-gradient-to-br from-neutral-50 via-primary/5 to-accent/5 relative overflow-x-hidden"
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -338,7 +338,7 @@ export function SimpleTimelineContainer() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <motion.span 
-              className="bg-gradient-to-r from-cyan-300 via-blue-300 to-purple-300 bg-clip-text text-transparent"
+              className="bg-gradient-to-r from-primary via-accent-mint to-secondary bg-clip-text text-transparent"
               animate={{
                 backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
               }}
@@ -353,7 +353,7 @@ export function SimpleTimelineContainer() {
             </motion.span>
             <br />
             <motion.span 
-              className="bg-gradient-to-r from-green-300 via-teal-300 to-cyan-300 bg-clip-text text-transparent"
+              className="bg-gradient-to-r from-accent via-accent-light to-accent-mint bg-clip-text text-transparent"
               animate={{
                 backgroundPosition: ['100% 50%', '0% 50%', '100% 50%'],
               }}
@@ -370,7 +370,7 @@ export function SimpleTimelineContainer() {
           </motion.h1>
           
           <motion.p 
-            className="text-sm sm:text-base md:text-lg lg:text-xl text-slate-300 mb-4 sm:mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-1 sm:px-2"
+            className="text-sm sm:text-base md:text-lg lg:text-xl text-neutral-600 mb-4 sm:mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-1 sm:px-2"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -382,7 +382,7 @@ export function SimpleTimelineContainer() {
           {/* Mobile swipe hint */}
           {isMobile && (
             <motion.div 
-              className="flex items-center justify-center gap-2 text-cyan-300 text-sm mb-4"
+              className="flex items-center justify-center gap-2 text-accent-mint text-sm mb-4"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 1 }}
@@ -404,7 +404,7 @@ export function SimpleTimelineContainer() {
           >
             <motion.button
               onClick={isAutoPlaying ? pausePlay : startAutoPlay}
-              className="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg hover:from-cyan-600 hover:to-blue-600 transition-all shadow-lg flex items-center gap-2 sm:gap-3 min-h-[48px] w-full sm:w-auto justify-center touch-manipulation"
+              className="bg-gradient-to-r from-accent to-accent-light text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold text-sm sm:text-base lg:text-lg hover:from-accent/90 hover:to-accent-light/90 transition-all shadow-lg flex items-center gap-2 sm:gap-3 min-h-[48px] w-full sm:w-auto justify-center touch-manipulation"
               whileHover={{ scale: isMobile ? 1 : 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label={isAutoPlaying ? 'Pause automatic timeline progression' : 'Start automatic timeline progression'}
@@ -425,7 +425,7 @@ export function SimpleTimelineContainer() {
             </motion.button>
             <motion.button
               onClick={resetTimeline}
-              className="glass-panel text-white px-4 sm:px-6 py-3 sm:py-4 rounded-full font-semibold hover:bg-white/20 transition-all flex items-center gap-2 min-h-[48px] w-full sm:w-auto justify-center touch-manipulation"
+              className="border-2 border-primary bg-neutral-50/90 text-primary px-4 sm:px-6 py-3 sm:py-4 rounded-full font-semibold hover:bg-primary hover:text-white transition-all flex items-center gap-2 min-h-[48px] w-full sm:w-auto justify-center touch-manipulation"
               whileHover={{ scale: isMobile ? 1 : 1.05 }}
               whileTap={{ scale: 0.95 }}
               aria-label="Reset timeline to beginning"
@@ -448,9 +448,9 @@ export function SimpleTimelineContainer() {
           <div className="max-w-6xl mx-auto">
             <div className="relative px-2 sm:px-0">
               {/* Timeline Line */}
-              <div className="absolute left-2 right-2 sm:left-0 sm:right-0 top-1/2 h-0.5 sm:h-1 bg-slate-700 rounded-full"></div>
+              <div className="absolute left-2 right-2 sm:left-0 sm:right-0 top-1/2 h-0.5 sm:h-1 bg-neutral-300 rounded-full"></div>
               <motion.div 
-                className="absolute left-2 sm:left-0 top-1/2 h-0.5 sm:h-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full"
+                className="absolute left-2 sm:left-0 top-1/2 h-0.5 sm:h-1 bg-gradient-to-r from-accent to-accent-light rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: `calc(${(currentStep / (timelineSteps.length - 1)) * 100}% - ${isMobile ? '8px' : '0px'})` }}
                 transition={{ duration: 1, ease: "easeInOut" }}

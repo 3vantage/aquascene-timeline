@@ -154,41 +154,41 @@ const config: Config = {
           800: '#92400e',
           900: '#78350f',
         },
-        // Primary Aquascaping Colors
+        // New Professional Aquascaping Colors - Natural Waters Theme
         primary: {
-          DEFAULT: '#2D5A3D', // Deep Forest Green
-          light: '#4A7C59',   // Sage Green
-          dark: '#1A3A2E',    // Dark Forest
+          DEFAULT: '#1B4332', // Deep Forest - rich, professional green
+          light: '#2D5A3D',   // Sage Green - calming sage
+          dark: '#0D2818',    // Deeper Forest
         },
         secondary: {
-          DEFAULT: '#4A90A4', // Clear Water Blue
-          light: '#87CEEB',   // Light Aqua
-          dark: '#1E3A5F',    // Ocean Depth
+          DEFAULT: '#2B4F60', // Ocean Depth - deep, sophisticated blue
+          light: '#4A6B7A',   // Lighter Ocean
+          dark: '#1A3240',    // Deeper Ocean
         },
         accent: {
-          DEFAULT: '#6B9B7C', // Soft Eucalyptus
-          light: '#A8C9B0',   // Mint Whisper
-          coral: '#FF6B6B',   // Living Coral
-          emerald: '#1A8B42', // Vibrant Emerald
+          DEFAULT: '#E76F51', // Warm Coral - call-to-action color
+          light: '#F4A261',   // Golden Sand - highlights
+          mint: '#52B2B2',    // Aqua Mint - success states
+          wood: '#8B7355',    // Driftwood - secondary elements
         },
-        // Neutral Foundation
+        // Neutral Foundation - Readable & Professional
         neutral: {
-          50: '#FAFAFA',      // Off-White
-          100: '#F8F9FA',     // Light Gray
-          200: '#F5F1E8',     // Sand Beige
+          50: '#FEFEFE',      // Cloud White - pure backgrounds
+          100: '#F8F9FA',     // Soft Pearl - light backgrounds
+          200: '#F1F3F4',     // Light neutral
           300: '#E5E7EB',     // Subtle dividers
-          400: '#9CA3AF',     // Medium Gray
-          500: '#6C757D',     // Secondary text
+          400: '#9CA3AF',     // Medium gray
+          500: '#6C757D',     // Warm Gray - secondary text
           600: '#4B5563',     // Dark secondary
-          700: '#374151',     // Primary text
-          800: '#1F2937',     // Dark text
-          900: '#111827',     // Charcoal
+          700: '#2D3436',     // Charcoal - primary text
+          800: '#1A1D23',     // Deep Slate - headers
+          900: '#0F1419',     // Deepest
         },
-        // Status Colors
-        success: '#28A745',
-        warning: '#FFC107',
-        error: '#DC3545',
-        info: '#17A2B8',
+        // Status Colors - Natural & Clear
+        success: '#40A06A', // Natural green
+        warning: '#FFA726', // Warm amber
+        error: '#E53935',   // Clear red
+        info: '#42A5F5',    // Gentle blue
         // Glass morphism effects
         glass: {
           white: 'rgba(255, 255, 255, 0.1)',
@@ -197,9 +197,9 @@ const config: Config = {
         }
       },
       fontFamily: {
-        primary: ['Inter', 'system-ui', 'sans-serif'],
-        secondary: ['Source Sans Pro', 'system-ui', 'sans-serif'],
-        accent: ['Playfair Display', 'Georgia', 'serif'],
+        primary: ['Inter', '-apple-system', 'BlinkMacSystemFont', '"Segoe UI"', 'system-ui', 'sans-serif'],
+        heading: ['Poppins', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+        accent: ['"Source Serif Pro"', 'Georgia', '"Times New Roman"', 'serif'],
       },
       fontSize: {
         'xs': ['0.75rem', { lineHeight: '1.4' }],
@@ -212,7 +212,9 @@ const config: Config = {
         '4xl': ['2.25rem', { lineHeight: '1.2' }],
         '5xl': ['3rem', { lineHeight: '1.1' }],
         '6xl': ['3.75rem', { lineHeight: '1' }],
-        'hero': ['clamp(2.5rem, 4vw, 3.5rem)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+        'hero': ['clamp(2.5rem, 5vw, 4rem)', { lineHeight: '1.1', letterSpacing: '-0.02em' }],
+        'display': ['clamp(2rem, 4vw, 3rem)', { lineHeight: '1.2', letterSpacing: '-0.01em' }],
+        'large': ['clamp(1.125rem, 2vw, 1.25rem)', { lineHeight: '1.6' }],
       },
       spacing: {
         '18': '4.5rem',
