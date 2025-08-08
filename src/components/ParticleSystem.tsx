@@ -16,7 +16,7 @@ interface Particle {
 const ParticleSystem: React.FC = () => {
   const [particles, setParticles] = useState<Particle[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
